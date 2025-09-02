@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Test orientativo — Juegos Cognitivos FALLTEM</title>
-  <meta name="description" content="Test orientativo para recomendar juegos cognitivos de la Fundación FALLTEM según tus necesidades (memoria, cálculo, razonamiento, lenguaje)." />
+  <meta name="description" content="Test orientativo para recomendar juegos cognitivos según tus necesidades (memoria, cálculo, razonamiento, lenguaje)." />
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#0b0b0b" />
 
@@ -21,7 +21,7 @@
                  frame-ancestors 'none';
                  form-action 'self'">
 
-  <link rel="stylesheet" href="style.css?v=1.0.0">
+  <link rel="stylesheet" href="style.css?v=1.1.0">
 </head>
 <body>
   <a class="skip" href="#testForm">Saltar al test</a>
@@ -32,11 +32,9 @@
       Respondé 4 preguntas rápidas y te recomendamos un juego cognitivo acorde a tus necesidades.
       Es una orientación, <strong>no</strong> es diagnóstico.
     </p>
-    <p><a class="link-all" href="https://fundacion-falltem.github.io/" rel="noopener">Omitir y ver todos los juegos</a></p>
   </header>
 
   <main class="wrap" role="main">
-    <!-- OJO: este id debe coincidir con test.js (testForm) -->
     <form id="testForm" class="card" novalidate aria-labelledby="titulotest">
       <h2 id="titulotest" class="h2">Tus respuestas</h2>
 
@@ -44,9 +42,15 @@
       <fieldset class="q">
         <legend class="q-title">1) <strong>Memoria:</strong> ¿Te cuesta recordar cosas recientes?</legend>
         <div class="options">
-          <label class="opt"><input type="radio" name="q1" value="0"><span>Nunca</span></label>
-          <label class="opt"><input type="radio" name="q1" value="1"><span>A veces</span></label>
-          <label class="opt"><input type="radio" name="q1" value="2"><span>Siempre</span></label>
+          <label class="opt">
+            <input type="radio" name="q1" value="0"><span>Nunca</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="q1" value="1"><span>A veces</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="q1" value="2"><span>Siempre</span>
+          </label>
         </div>
       </fieldset>
 
@@ -54,9 +58,15 @@
       <fieldset class="q">
         <legend class="q-title">2) <strong>Cálculo:</strong> ¿Te resulta difícil hacer cálculos mentales rápidos?</legend>
         <div class="options">
-          <label class="opt"><input type="radio" name="q2" value="0"><span>Nunca</span></label>
-          <label class="opt"><input type="radio" name="q2" value="1"><span>A veces</span></label>
-          <label class="opt"><input type="radio" name="q2" value="2"><span>Siempre</span></label>
+          <label class="opt">
+            <input type="radio" name="q2" value="0"><span>Nunca</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="q2" value="1"><span>A veces</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="q2" value="2"><span>Siempre</span>
+          </label>
         </div>
       </fieldset>
 
@@ -64,9 +74,15 @@
       <fieldset class="q">
         <legend class="q-title">3) <strong>Razonamiento:</strong> ¿Encontrás complicado identificar diferencias entre objetos?</legend>
         <div class="options">
-          <label class="opt"><input type="radio" name="q3" value="0"><span>Nunca</span></label>
-          <label class="opt"><input type="radio" name="q3" value="1"><span>A veces</span></label>
-          <label class="opt"><input type="radio" name="q3" value="2"><span>Siempre</span></label>
+          <label class="opt">
+            <input type="radio" name="q3" value="0"><span>Nunca</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="q3" value="1"><span>A veces</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="q3" value="2"><span>Siempre</span>
+          </label>
         </div>
       </fieldset>
 
@@ -74,14 +90,19 @@
       <fieldset class="q">
         <legend class="q-title">4) <strong>Lenguaje:</strong> ¿Te cuesta encontrar palabras al hablar o escribir?</legend>
         <div class="options">
-          <label class="opt"><input type="radio" name="q4" value="0"><span>Nunca</span></label>
-          <label class="opt"><input type="radio" name="q4" value="1"><span>A veces</span></label>
-          <label class="opt"><input type="radio" name="q4" value="2"><span>Siempre</span></label>
+          <label class="opt">
+            <input type="radio" name="q4" value="0"><span>Nunca</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="q4" value="1"><span>A veces</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="q4" value="2"><span>Siempre</span>
+          </label>
         </div>
       </fieldset>
 
       <div class="actions">
-        <!-- submit: test.js escucha el submit del formulario -->
         <button type="submit" class="btn primary">Ver recomendación</button>
         <button type="reset" class="btn ghost">Borrar respuestas</button>
       </div>
@@ -96,10 +117,11 @@
     <p class="small">
       Desarrollado para <a href="https://falltem.org/" rel="noopener">FALLTEM</a> · Código abierto MIT ·
       Actividad lúdica/orientativa; <strong>no</strong> es práctica médica.
+      <span id="version" class="muted"></span>
     </p>
   </footer>
 
   <noscript><p class="wrap">Este test requiere JavaScript para funcionar.</p></noscript>
-  <script src="test.js?v=1.0.0" defer></script>
+  <script src="test.js?v=1.1.0" defer></script>
 </body>
 </html>
