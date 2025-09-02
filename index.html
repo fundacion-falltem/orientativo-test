@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test orientativo — Juegos Cognitivos FALLTEM</title>
+  <meta name="description" content="Test orientativo para recomendar juegos cognitivos de la Fundación FALLTEM según tus necesidades (memoria, cálculo, razonamiento, lenguaje)." />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0b0b0b" />
+
+  <!-- CSP: sin inline scripts ni styles -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self';
+                 style-src 'self';
+                 img-src 'self' data:;
+                 font-src 'self';
+                 connect-src 'self';
+                 object-src 'none';
+                 base-uri 'none';
+                 frame-ancestors 'none';
+                 form-action 'self'">
+
+  <link rel="stylesheet" href="style.css?v=1.0.0">
+</head>
+<body>
+  <a class="skip" href="#testForm">Saltar al test</a>
+
+  <header class="wrap header">
+    <h1>Test orientativo</h1>
+    <p class="lead">
+      Respondé 4 preguntas rápidas y te recomendamos un juego cognitivo acorde a tus necesidades.
+      Es una orientación, <strong>no</strong> es diagnóstico.
+    </p>
+    <p><a class="link-all" href="https://fundacion-falltem.github.io/" rel="noopener">Omitir y ver todos los juegos</a></p>
+  </header>
+
+  <main class="wrap" role="main">
+    <!-- OJO: este id debe coincidir con test.js (testForm) -->
+    <form id="testForm" class="card" novalidate aria-labelledby="titulotest">
+      <h2 id="titulotest" class="h2">Tus respuestas</h2>
+
+      <!-- q1: Memoria -->
+      <fieldset class="q">
+        <legend class="q-title">1) <strong>Memoria:</strong> ¿Te cuesta recordar cosas recientes?</legend>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q1" value="0"><span>Nunca</span></label>
+          <label class="opt"><input type="radio" name="q1" value="1"><span>A veces</span></label>
+          <label class="opt"><input type="radio" name="q1" value="2"><span>Siempre</span></label>
+        </div>
+      </fieldset>
+
+      <!-- q2: Cálculo -->
+      <fieldset class="q">
+        <legend class="q-title">2) <strong>Cálculo:</strong> ¿Te resulta difícil hacer cálculos mentales rápidos?</legend>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q2" value="0"><span>Nunca</span></label>
+          <label class="opt"><input type="radio" name="q2" value="1"><span>A veces</span></label>
+          <label class="opt"><input type="radio" name="q2" value="2"><span>Siempre</span></label>
+        </div>
+      </fieldset>
+
+      <!-- q3: Razonamiento -->
+      <fieldset class="q">
+        <legend class="q-title">3) <strong>Razonamiento:</strong> ¿Encontrás complicado identificar diferencias entre objetos?</legend>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q3" value="0"><span>Nunca</span></label>
+          <label class="opt"><input type="radio" name="q3" value="1"><span>A veces</span></label>
+          <label class="opt"><input type="radio" name="q3" value="2"><span>Siempre</span></label>
+        </div>
+      </fieldset>
+
+      <!-- q4: Lenguaje -->
+      <fieldset class="q">
+        <legend class="q-title">4) <strong>Lenguaje:</strong> ¿Te cuesta encontrar palabras al hablar o escribir?</legend>
+        <div class="options">
+          <label class="opt"><input type="radio" name="q4" value="0"><span>Nunca</span></label>
+          <label class="opt"><input type="radio" name="q4" value="1"><span>A veces</span></label>
+          <label class="opt"><input type="radio" name="q4" value="2"><span>Siempre</span></label>
+        </div>
+      </fieldset>
+
+      <div class="actions">
+        <!-- submit: test.js escucha el submit del formulario -->
+        <button type="submit" class="btn primary">Ver recomendación</button>
+        <button type="reset" class="btn ghost">Borrar respuestas</button>
+      </div>
+
+      <hr class="sep" aria-hidden="true">
+
+      <section id="resultado" class="resultado" hidden aria-live="polite" aria-atomic="true"></section>
+    </form>
+  </main>
+
+  <footer class="wrap footer">
+    <p class="small">
+      Desarrollado para <a href="https://falltem.org/" rel="noopener">FALLTEM</a> · Código abierto MIT ·
+      Actividad lúdica/orientativa; <strong>no</strong> es práctica médica.
+    </p>
+  </footer>
+
+  <noscript><p class="wrap">Este test requiere JavaScript para funcionar.</p></noscript>
+  <script src="test.js?v=1.0.0" defer></script>
+</body>
+</html>
