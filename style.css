@@ -93,6 +93,7 @@ body{
 /* Título sección */
 .h2{ margin:0 0 .8rem; font-weight:800; letter-spacing:0.15px }
 
+
 /* ===================== Formulario ===================== */
 .q{ border:0; margin:0 0 var(--space); padding:0 }
 .q-title{ margin:0 0 .7rem; font-weight:700 }
@@ -321,3 +322,20 @@ body{
 
 /* Separador antes del resultado: más respiro visual */
 .sep{ margin: calc(var(--space) * 1.2) 0; }
+
+
+/* — Botón "ver todos los juegos" más chico — */
+.resultado a:is(:nth-of-type(2), :last-of-type){
+  font-size: .95rem;      /* antes ~1.05rem */
+  padding: .8rem 1rem;    /* bajamos un poquito el alto */
+  font-weight: 800;       /* conservamos jerarquía */
+}
+
+/* en móviles muy chicos, aún un toque menor */
+@media (max-width: 460px){
+  .resultado a:is(:nth-of-type(2), :last-of-type){
+    font-size: .92rem;
+    padding: .78rem .95rem;
+    min-width: 200px;     /* opcional, evita que se vea “enorme” */
+  }
+}
