@@ -190,7 +190,7 @@ body{
 .result-actions .btn{ background: var(--accent-2); color:#072a32 }
 
 /* Footer / utilidades */
-.small{ font-size:.88em }
+.small{ font-size:.65em }
 .muted{ color: var(--muted) }
 
 /* Skip link accesible */
@@ -222,3 +222,102 @@ body{
     background: #eef8ea; /* tono claro acorde marca */
   }
 }
+
+/* ============ 1) Más espacio entre preguntas ============ */
+.q{
+  margin: 0 0 calc(var(--space) * 1.6);   /* antes: var(--space) */
+}
+.q-title{
+  margin-bottom: 0.9rem;                  /* +aire para lectura */
+}
+.options{ row-gap: .8rem; }               /* separa filas en mobile */
+
+/* En pantallas chicas, todavía más aire entre bloques */
+@media (max-width: 420px){
+  .q{ margin-bottom: calc(var(--space) * 1.9); }
+}
+
+/* ============ 2) Acciones centradas y jerarquía ============ */
+.actions{
+  justify-content: center;                 /* centrado */
+  margin-top: calc(var(--space) * 1.1);
+}
+/* Botón primario bien protagónico y adaptable */
+.actions .btn{
+  min-width: 240px;
+}
+.actions .btn.primary{
+  font-size: 1.08rem;
+  padding: 1rem 1.3rem;                    /* un toque más alto */
+}
+/* En mobile, que ambos botones ocupen buen ancho y queden apilados lindos */
+@media (max-width: 500px){
+  .actions{ gap: 0.9rem; }
+  .actions .btn{ width: 100%; max-width: 440px; }
+}
+
+/* ============ 3) Resultado más gráfico (sin cambiar HTML) ============ */
+.resultado{ text-align: center; }          /* centra todo el bloque */
+
+.result-box{
+  padding: 1.1rem 1.2rem;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+
+/* Título del juego recomendado */
+.result-box h3{
+  font-weight: 900;
+  font-size: clamp(1.6rem, 3.5vw, 2rem);
+  line-height: 1.2;
+  margin: .3rem 0 .7rem;
+}
+
+/* Texto/explicación del resultado */
+.result-box p{
+  margin: 0 0 .9rem;
+}
+
+/* Convertimos los <a> del resultado en CTAs sin tocar el HTML */
+.resultado a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 800;
+  border-radius: 14px;
+  padding: .9rem 1.1rem;
+  line-height: 1;
+  border: 1px solid var(--border);
+  transition: transform .08s ease, filter .15s ease, box-shadow .15s ease,
+              background-color .15s ease, color .15s ease;
+}
+
+/* 1er link (suele ser “Ir al juego”) → primario */
+.resultado a:first-of-type{
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  border-color: color-mix(in oklab, var(--accent) 60%, var(--border));
+  min-width: 220px;
+}
+
+/* 2º link (suele ser “ver todos los juegos”) → secundario/ghost */
+.resultado a:nth-of-type(2){
+  background: transparent;
+  color: var(--ink-3, #125360);  /* usa azul petróleo de la marca si está definido */
+  border-color: var(--border);
+}
+
+/* Hover/Focus para ambos */
+.resultado a:hover{ transform: translateY(-1px); filter: brightness(1.04); }
+.resultado a:focus-visible{ outline: 3px solid var(--focus-color); outline-offset: 3px; }
+
+/* Separación entre CTAs */
+.resultado a + a{ margin-left: .6rem; }
+@media (max-width: 460px){
+  .resultado a{ width: 100%; max-width: 440px; }
+  .resultado a + a{ margin-left: 0; margin-top: .6rem; }
+}
+
+/* Separador antes del resultado: más respiro visual */
+.sep{ margin: calc(var(--space) * 1.2) 0; }
