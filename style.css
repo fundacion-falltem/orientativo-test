@@ -240,3 +240,44 @@ body{
     background: #eef8ea; /* tono claro acorde marca */
   }
 }
+
+/* === Quitar el “punto” verde del radio seleccionado === */
+/* Variante A (recomendada): dejar el aro, sin punto interno */
+.opt:has(input:checked)::before{
+  /* mantenemos el aro en color de marca, sin relleno */
+  border-color: var(--accent);
+  box-shadow: none;          /* <- esto saca el puntito */
+  background: transparent;
+}
+
+/* Si preferís que desaparezca el círculo completo al seleccionar: */
+
+.opt:has(input:checked)::before{
+  opacity: 0;
+}
+
+
+/* === Espaciado tipográfico un poco más “aireado” === */
+body{
+  line-height: 1.7;          /* antes 1.6 */
+  letter-spacing: 0.15px;    /* leve tracking para Montserrat */
+}
+
+/* Párrafos y textos largos (lead) con aire vertical cómodo */
+.lead, p{ margin-bottom: 0.9rem; }     /* antes ~0.8rem */
+.q-title{ margin-bottom: 0.7rem; }
+
+/* Opciones: texto con algo más de interlínea */
+.opt span{
+  line-height: 1.3;          /* antes 1.2 */
+  letter-spacing: 0.2px;
+}
+
+/* Titulares un poquito más sueltos (opcional) */
+.header h1{ letter-spacing: 0.2px; }
+.h2{ letter-spacing: 0.15px; }
+
+/* En móviles muy chicos abrimos aún más el interlineado para legibilidad */
+@media (max-width: 380px){
+  body{ line-height: 1.75; }
+}
