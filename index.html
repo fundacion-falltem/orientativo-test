@@ -3,27 +3,43 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Test orientativo — Juegos Cognitivos FALLTEM</title>
   <meta name="description" content="Test orientativo para recomendar juegos cognitivos según tus necesidades (memoria, cálculo, razonamiento, lenguaje)." />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="theme-color" content="#0b0b0b" />
 
-  <!-- CSP: sin inline scripts ni styles -->
+  <!-- Preferimos modo claro por defecto, con soporte dark -->
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f8fbf4">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0b0b">
+
+  <!-- CSP (habilita solo Google Fonts). Si usás fuentes locales, reemplazá por tu CSP original estricta -->
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'self';
                  script-src 'self';
-                 style-src 'self';
+                 style-src 'self' https://fonts.googleapis.com;
                  img-src 'self' data:;
-                 font-src 'self';
+                 font-src 'self' https://fonts.gstatic.com data:;
                  connect-src 'self';
                  object-src 'none';
                  base-uri 'none';
                  frame-ancestors 'none';
                  form-action 'self'">
 
+  <!-- Metadatos sociales (opcional) -->
+  <meta property="og:title" content="Test orientativo — Juegos Cognitivos FALLTEM">
+  <meta property="og:description" content="Recomendación de juegos cognitivos según tus necesidades (memoria, cálculo, razonamiento, lenguaje).">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+
+  <!-- Montserrat desde Google Fonts (si usás fuentes locales, quitá esto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
   <link rel="stylesheet" href="style.css?v=1.1.0">
 </head>
-<body>
+<body data-theme="light">
   <a class="skip" href="#testForm">Saltar al test</a>
 
   <header class="wrap header">
@@ -34,8 +50,8 @@
     </p>
   </header>
 
-  <main class="wrap" role="main">
-    <form id="testForm" class="card" novalidate aria-labelledby="titulotest">
+  <main class="wrap">
+    <form id="testForm" class="card" novalidate aria-labelledby="titulotest" autocomplete="off">
       <h2 id="titulotest" class="h2">Tus respuestas</h2>
 
       <!-- q1: Memoria -->
@@ -109,7 +125,8 @@
 
       <hr class="sep" aria-hidden="true">
 
-      <section id="resultado" class="resultado" hidden aria-live="polite" aria-atomic="true"></section>
+      <!-- Anuncio accesible del resultado -->
+      <section id="resultado" class="resultado" hidden role="status" aria-live="polite" aria-atomic="true"></section>
     </form>
   </main>
 
@@ -122,6 +139,8 @@
   </footer>
 
   <noscript><p class="wrap">Este test requiere JavaScript para funcionar.</p></noscript>
+
+  <!-- JS -->
   <script src="test.js?v=1.1.0" defer></script>
 </body>
 </html>
