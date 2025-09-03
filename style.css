@@ -1,8 +1,5 @@
 /* =========================================================
-   FALLTEM — Test orientativo (CSS unificado y accesible)
-   - Paleta y tipografía: Montserrat (definida en HTML)
-   - Modo claro por defecto, dark opcional via [data-theme]
-   - Radios accesibles con “pill” responsive (grid)
+   FALLTEM — Test orientativo (CSS final unificado)
    ========================================================= */
 
 /* ===================== Tokens ===================== */
@@ -62,7 +59,8 @@ body{
   color:var(--fg);
   font-family: var(--font);
   font-size: var(--fs-base);
-  line-height:1.6;
+  line-height:1.7;              /* más aire según lineamiento */
+  letter-spacing:0.15px;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -79,8 +77,9 @@ body{
   font-size: clamp(1.9rem, 1.7vw + 1rem, 2.4rem);
   margin:.3rem 0 .25rem;
   font-weight: 900;
+  letter-spacing:0.2px;
 }
-.lead{ margin:.2rem 0 0; color: var(--fg) }
+.lead{ margin:.2rem 0 0 0; color: var(--fg) }
 
 /* Tarjeta */
 .card{
@@ -92,34 +91,33 @@ body{
 }
 
 /* Título sección */
-.h2{ margin:0 0 .8rem; font-weight:800 }
+.h2{ margin:0 0 .8rem; font-weight:800; letter-spacing:0.15px }
 
 /* ===================== Formulario ===================== */
 .q{ border:0; margin:0 0 var(--space); padding:0 }
-.q-title{ margin:0 0 .6rem; font-weight:700 }
+.q-title{ margin:0 0 .7rem; font-weight:700 }
 
 /* ------- Opciones (pills) ------- */
-/* Grid responsive: se adapta 1–3 por fila */
+/* Grid responsive */
 .options{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap:.6rem;
 }
 
-/* Cada opción es un label “pill” */
+/* Pill limpia sin círculo */
 .opt{
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 
-  /* Espacio para el círculo a la izquierda */
-  padding: .78rem .9rem .78rem 2.4rem;
-  min-height: 56px;                 /* área táctil cómoda */
+  padding: .78rem 1.1rem;       /* simétrico */
+  min-height: 56px;             /* área táctil cómoda */
 
   border:1px solid var(--border);
-  background: #11111122;            /* leve contraste, queda neutro en ambos temas */
+  background: #11111122;
   border-radius: 999px;
   cursor:pointer;
   user-select:none;
@@ -129,48 +127,35 @@ body{
 }
 .opt:hover{ transform: translateY(-1px) }
 
-/* Input oculto pero presente para accesibilidad */
+/* Input accesible, oculto */
 .opt input{
   position:absolute;
-  inset:0;                          /* ayuda a que sea focusable en algunos AT */
+  inset:0;
   opacity:0;
   pointer-events:none;
-  width:1px; height:1px;
 }
 
 /* Texto */
 .opt span{
   display:inline-block;
   font-weight:700;
+  line-height:1.3;
   letter-spacing:.2px;
-  line-height:1.2;
-  white-space: normal;              /* permite “A veces” en 2 líneas */
+  white-space: normal;          /* permite “A veces” en 2 líneas */
 }
 
-/* Círculo del radio (en el label, no en el span) */
-.opt::before{
-  content:"";
-  position:absolute;
-  left:.9rem; top:50%; transform:translateY(-50%);
-  width:18px; height:18px; border-radius:50%;
-  border:2px solid var(--border);
-  background: transparent;
-}
-
-/* Selección: “punto” interno + realce de la pill */
-.opt:has(input:checked)::before{
-  border-color: var(--accent);
-  box-shadow: inset 0 0 0 6px var(--accent);
-}
+/* Estado seleccionado */
 .opt:has(input:checked){
-  border-color: color-mix(in oklab, var(--accent) 60%, var(--border));
+  border-color: var(--accent);
   background: color-mix(in oklab, var(--accent) 18%, transparent);
+  box-shadow: 0 0 0 1px var(--accent);
 }
 
-/* Foco accesible en el círculo + pill */
-.opt:has(input:focus-visible)::before{
-  outline:3px solid var(--focus-color);
-  outline-offset:3px;
+/* Foco accesible */
+.opt:has(input:focus-visible){
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 0 0 4px var(--focus-color);
 }
 
 /* ------- Botones ------- */
@@ -202,7 +187,7 @@ body{
 }
 .result-title{ margin:.2rem 0 .4rem; font-weight:900; font-size:1.15em }
 .result-actions{ display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.6rem }
-.result-actions .btn{ background: var(--accent-2); color:#072a32 } /* contraste sobre celeste */
+.result-actions .btn{ background: var(--accent-2); color:#072a32 }
 
 /* Footer / utilidades */
 .small{ font-size:.88em }
@@ -216,68 +201,24 @@ body{
 }
 
 /* ===================== Responsivo ===================== */
-/* En pantallas muy chicas, forzamos 2 columnas para texto cómodo */
 @media (max-width: 380px){
   .options{ grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+  .opt{ min-height:58px; }
 }
-
-/* En pantallas medianas/grandes, 3 columnas prolijas */
 @media (min-width: 640px){
   .options{ grid-template-columns: repeat(3, minmax(140px, 1fr)); }
   .opt{ min-height:60px; }
 }
 
-/* ===================== Preferencias del usuario ===================== */
+/* ===================== Preferencias ===================== */
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; animation:none !important }
 }
 
 /* ===================== Fallbacks ===================== */
-/* Si el navegador no soporta color-mix */
 @supports not (color: color-mix(in oklab, red 50%, white)){
   .opt:has(input:checked){
     border-color: var(--accent);
     background: #eef8ea; /* tono claro acorde marca */
   }
-}
-
-/* === Quitar el “punto” verde del radio seleccionado === */
-/* Variante A (recomendada): dejar el aro, sin punto interno */
-.opt:has(input:checked)::before{
-  /* mantenemos el aro en color de marca, sin relleno */
-  border-color: var(--accent);
-  box-shadow: none;          /* <- esto saca el puntito */
-  background: transparent;
-}
-
-/* Si preferís que desaparezca el círculo completo al seleccionar: */
-
-.opt:has(input:checked)::before{
-  opacity: 0;
-}
-
-
-/* === Espaciado tipográfico un poco más “aireado” === */
-body{
-  line-height: 1.7;          /* antes 1.6 */
-  letter-spacing: 0.15px;    /* leve tracking para Montserrat */
-}
-
-/* Párrafos y textos largos (lead) con aire vertical cómodo */
-.lead, p{ margin-bottom: 0.9rem; }     /* antes ~0.8rem */
-.q-title{ margin-bottom: 0.7rem; }
-
-/* Opciones: texto con algo más de interlínea */
-.opt span{
-  line-height: 1.3;          /* antes 1.2 */
-  letter-spacing: 0.2px;
-}
-
-/* Titulares un poquito más sueltos (opcional) */
-.header h1{ letter-spacing: 0.2px; }
-.h2{ letter-spacing: 0.15px; }
-
-/* En móviles muy chicos abrimos aún más el interlineado para legibilidad */
-@media (max-width: 380px){
-  body{ line-height: 1.75; }
 }
