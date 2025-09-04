@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <p>En base a tus respuestas, te recomendamos jugar:</p>
       <h2>${juego.nombre}</h2>
       <a href="${juego.url}" target="_blank" class="btn">Ir al juego</a>
-      <p><a href="https://falltem.org/juegos/">ver todos los juegos</a></p>
+      <p><a href="https://falltem.org/juegos/#games-cards">ver todos los juegos</a></p>
     `;
     resultEl.hidden = false;
     resultEl.scrollIntoView({ behavior: 'smooth' });
