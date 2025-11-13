@@ -1,5 +1,5 @@
 /* =========================================================
-   FALLTEM — Test orientativo (CSS final unificado)
+   FALLTEM — Test orientativo (CSS final unificado, DaisyUI-friendly)
    ========================================================= */
 
 /* ===================== Tokens ===================== */
@@ -81,7 +81,7 @@ body{
 }
 .lead{ margin:.2rem 0 0 0; color: var(--fg) }
 
-/* Tarjeta */
+/* Tarjeta (apoya a DaisyUI .card) */
 .card{
   background:var(--card);
   border:1px solid var(--border);
@@ -128,12 +128,10 @@ body{
 }
 .opt:hover{ transform: translateY(-1px) }
 
-/* Input accesible, oculto */
+/* Input accesible: YA NO lo ocultamos completamente
+   (dejamos que DaisyUI/Tailwind lo estilice si quisieras usar radios visibles) */
 .opt input{
-  position:absolute;
-  inset:0;
-  opacity:0;
-  pointer-events:none;
+  margin-right: .4rem;
 }
 
 /* Texto */
@@ -145,7 +143,7 @@ body{
   white-space: normal;          /* permite “A veces” en 2 líneas */
 }
 
-/* Estado seleccionado */
+/* Estado seleccionado (si mantenés radios invisibles / CSS-only, podés volver a ocultar input y usar :has) */
 .opt:has(input:checked){
   border-color: var(--accent);
   background: color-mix(in oklab, var(--accent) 18%, transparent);
@@ -164,17 +162,19 @@ body{
   display:flex; gap:.8rem; flex-wrap:wrap;
   margin-top:.4rem;
 }
+
+/* Aquí .btn complementa al .btn de DaisyUI
+   (no definimos fondo/borde para no pisar btn-primary / btn-ghost) */
 .btn{
-  border:0; border-radius:14px; cursor:pointer; font-weight:800;
-  padding:.9rem 1.2rem; min-height:52px; font-size:1.05rem;
+  font-weight:800;
+  padding:.9rem 1.2rem;
+  min-height:52px;
+  font-size:1.05rem;
   transition: transform .08s ease, filter .15s ease, box-shadow .15s ease,
               background-color .15s ease, color .15s ease;
 }
 .btn:hover{ transform: translateY(-1px); filter: brightness(1.04) }
 .btn:focus-visible{ outline:3px solid var(--focus-color); outline-offset:3px }
-
-.btn.primary{ background:var(--btn-primary-bg); color:var(--btn-primary-fg) }
-.btn.ghost{ background:transparent; color:var(--btn-ghost-fg); border:1px solid var(--border) }
 
 /* Separador */
 .sep{ border:none; border-top:1px solid var(--border); margin: var(--space) 0 }
@@ -247,7 +247,7 @@ body{
 .actions .btn{
   min-width: 240px;
 }
-.actions .btn.primary{
+.actions .btn.btn-primary{
   font-size: 1.08rem;
   padding: 1rem 1.3rem;                    /* un toque más alto */
 }

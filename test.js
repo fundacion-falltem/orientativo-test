@@ -50,14 +50,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const elegido = keys[Math.floor(Math.random() * keys.length)];
     const juego = juegos[elegido];
 
-    // render resultado
+    // render resultado (versión linda con Tailwind)
     resultEl.innerHTML = `
-      <p>En base a tus respuestas, te recomendamos jugar:</p>
-      <h2>${juego.nombre}</h2>
-      <a href="${juego.url}" target="_blank" class="btn">Ir al juego</a>
-      <p><a href="https://falltem.org/juegos/#games-cards">ver todos los juegos</a></p>
+      <div class="mt-4 bg-slate-50 border border-slate-200 rounded-2xl px-4 py-5 sm:px-6 sm:py-6 shadow-sm">
+        <p class="text-sm sm:text-base text-slate-700 mb-1">
+          En base a tus respuestas, te recomendamos jugar:
+        </p>
+
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mb-2">
+          ${juego.nombre}
+        </h2>
+
+        <p class="text-xs sm:text-sm text-slate-500 mb-4">
+          Podés empezar ahora mismo o ver otros juegos disponibles.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="${juego.url}"
+             target="_blank"
+             class="inline-flex items-center justify-center rounded-full
+                    bg-lime-500 hover:bg-lime-600 text-slate-900 font-extrabold
+                    text-sm sm:text-base py-2.5 px-6 shadow-md transition">
+            Ir al juego
+          </a>
+
+          <a href="https://falltem.org/juegos/#games-cards"
+             target="_blank"
+             class="inline-flex items-center justify-center rounded-full
+                    border border-slate-300 bg-white hover:bg-slate-50
+                    text-slate-700 font-semibold text-sm sm:text-base py-2.5 px-6 transition">
+            Ver todos los juegos
+          </a>
+        </div>
+      </div>
     `;
+
     resultEl.hidden = false;
-    resultEl.scrollIntoView({ behavior: 'smooth' });
+    resultEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 });

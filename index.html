@@ -7,140 +7,346 @@
   <title>Test orientativo — Juegos Cognitivos FALLTEM</title>
   <meta name="description" content="Test orientativo para recomendar juegos cognitivos según tus necesidades (memoria, cálculo, razonamiento, lenguaje)." />
 
-  <!-- Preferimos modo claro por defecto, con soporte dark -->
-  <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f8fbf4">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0b0b">
+  <!-- Tailwind SOLO -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- CSP (habilita solo Google Fonts). Si usás fuentes locales, reemplazá por tu CSP original estricta -->
-  <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self';
-                 script-src 'self';
-                 style-src 'self' https://fonts.googleapis.com;
-                 img-src 'self' data:;
-                 font-src 'self' https://fonts.gstatic.com data:;
-                 connect-src 'self';
-                 object-src 'none';
-                 base-uri 'none';
-                 frame-ancestors 'none';
-                 form-action 'self'">
-
-  <!-- Metadatos sociales (opcional) -->
-  <meta property="og:title" content="Test orientativo — Juegos Cognitivos FALLTEM">
-  <meta property="og:description" content="Recomendación de juegos cognitivos según tus necesidades (memoria, cálculo, razonamiento, lenguaje).">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="es_AR">
-
-  <!-- Montserrat desde Google Fonts (si usás fuentes locales, quitá esto) -->
+  <!-- Fuente Montserrat (opcional, igual que tus otros sitios) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Estilos -->
-  <link rel="stylesheet" href="style.css?v=1.1.0">
+  <style>
+    body {
+      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, sans-serif;
+    }
+  </style>
 </head>
-<body data-theme="light">
-  <a class="skip" href="#testForm">Saltar al test</a>
 
-  <header class="wrap header">
-    <h1>Test orientativo</h1>
-    <p class="lead">
-      Respondé 4 preguntas rápidas y te recomendamos un juego cognitivo acorde a tus necesidades.
-      Es una orientación, <strong>no</strong> es diagnóstico.
-    </p>
-  </header>
+<body class="min-h-screen bg-slate-100 text-slate-900">
+  <!-- Skip link accesible -->
+  <a href="#testForm"
+     class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4
+            focus:bg-lime-400 focus:text-slate-900 focus:px-3 focus:py-2
+            focus:rounded-lg focus:shadow-lg">
+    Saltar al test
+  </a>
 
-  <main class="wrap">
-    <form id="testForm" class="card" novalidate aria-labelledby="titulotest" autocomplete="off">
-      <h2 id="titulotest" class="h2">Tus respuestas</h2>
+  <main class="min-h-screen flex items-center justify-center px-4 py-10">
+    <div class="w-full max-w-4xl bg-white shadow-2xl rounded-3xl px-6 py-8 sm:px-10 sm:py-10">
+      <!-- Encabezado -->
+      <header class="mb-8">
+        <p class="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-lime-600 mb-1">
+          Juegos Cognitivos FALLTEM
+        </p>
+        <h1 class="text-3xl sm:text-4xl font-black leading-tight">
+          Test orientativo
+        </h1>
+        <p class="mt-3 text-base sm:text-lg text-slate-700 max-w-2xl">
+          Respondé 4 preguntas rápidas y te recomendamos un juego cognitivo acorde a tus necesidades.
+          Es una orientación, <strong>no</strong> es diagnóstico.
+        </p>
+      </header>
 
-      <!-- q1: Memoria -->
-      <fieldset class="q">
-        <legend class="q-title">1) <strong>Memoria:</strong> ¿Te cuesta recordar cosas recientes?</legend>
-        <div class="options">
-          <label class="opt">
-            <input type="radio" name="q1" value="0"><span>Nunca</span>
-          </label>
-          <label class="opt">
-            <input type="radio" name="q1" value="1"><span>A veces</span>
-          </label>
-          <label class="opt">
-            <input type="radio" name="q1" value="2"><span>Siempre</span>
-          </label>
+      <!-- Formulario -->
+      <form id="testForm"
+            class="space-y-7"
+            novalidate
+            autocomplete="off"
+            aria-labelledby="titulotest">
+
+        <h2 id="titulotest" class="text-xl sm:text-2xl font-extrabold">
+          Tus respuestas
+        </h2>
+
+        <!-- q1: Memoria -->
+        <fieldset class="space-y-3">
+          <legend class="font-semibold">
+            1) <strong>Memoria:</strong> ¿Te cuesta recordar cosas recientes?
+          </legend>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <!-- Nunca -->
+            <div>
+              <input
+                id="q1_nunca"
+                type="radio"
+                name="q1"
+                value="0"
+                class="peer sr-only"
+              />
+              <label for="q1_nunca"
+                     class="flex items-center justify-center rounded-full border border-slate-200
+                            bg-slate-100 px-4 py-3 text-center text-sm sm:text-base font-bold cursor-pointer
+                            transition hover:border-lime-400
+                            peer-checked:bg-lime-500 peer-checked:text-slate-900 peer-checked:border-lime-500">
+                Nunca
+              </label>
+            </div>
+
+            <!-- A veces -->
+            <div>
+              <input
+                id="q1_aveces"
+                type="radio"
+                name="q1"
+                value="1"
+                class="peer sr-only"
+              />
+              <label for="q1_aveces"
+                     class="flex items-center justify-center rounded-full border border-slate-200
+                            bg-slate-100 px-4 py-3 text-center text-sm sm:text-base font-bold cursor-pointer
+                            transition hover:border-lime-400
+                            peer-checked:bg-lime-500 peer-checked:text-slate-900 peer-checked:border-lime-500">
+                A veces
+              </label>
+            </div>
+
+            <!-- Siempre -->
+            <div>
+              <input
+                id="q1_siempre"
+                type="radio"
+                name="q1"
+                value="2"
+                class="peer sr-only"
+              />
+              <label for="q1_siempre"
+                     class="flex items-center justify-center rounded-full border border-slate-200
+                            bg-slate-100 px-4 py-3 text-center text-sm sm:text-base font-bold cursor-pointer
+                            transition hover:border-lime-400
+                            peer-checked:bg-lime-500 peer-checked:text-slate-900 peer-checked:border-lime-500">
+                Siempre
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- q2: Cálculo -->
+        <fieldset class="space-y-3">
+          <legend class="font-semibold">
+            2) <strong>Cálculo:</strong> ¿Te resulta difícil hacer cálculos mentales rápidos?
+          </legend>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <!-- Nunca -->
+            <div>
+              <input
+                id="q2_nunca"
+                type="radio"
+                name="q2"
+                value="0"
+                class="peer sr-only"
+              />
+              <label for="q2_nunca"
+                     class="flex items-center justify-center rounded-full border border-slate-200
+                            bg-slate-100 px-4 py-3 text-center text-sm sm:text-base font-bold cursor-pointer
+                            transition hover:border-lime-400
+                            peer-checked:bg-lime-500 peer-checked:text-slate-900 peer-checked:border-lime-500">
+                Nunca
+              </label>
+            </div>
+
+            <!-- A veces -->
+            <div>
+              <input
+                id="q2_aveces"
+                type="radio"
+                name="q2"
+                value="1"
+                class="peer sr-only"
+              />
+              <label for="q2_aveces"
+                     class="flex items-center justify-center rounded-full border border-slate-200
+                            bg-slate-100 px-4 py-3 text-center text-sm sm:text-base font-bold cursor-pointer
+                            transition hover:border-lime-400
+                            peer-checked:bg-lime-500 peer-checked:text-slate-900 peer-checked:border-lime-500">
+                A veces
+              </label>
+            </div>
+
+            <!-- Siempre -->
+            <div>
+              <input
+                id="q2_siempre"
+                type="radio"
+                name="q2"
+                value="2"
+                class="peer sr-only"
+              />
+              <label for="q2_siempre"
+                     class="flex items-center justify-center rounded-full border border-slate-200
+                            bg-slate-100 px-4 py-3 text-center text-sm sm:text-base font-bold cursor-pointer
+                            transition hover:border-lime-400
+                            peer-checked:bg-lime-500 peer-checked:text-slate-900 peer-checked:border-lime-500">
+                Siempre
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- q3: Razonamiento -->
+        <fieldset class="space-y-3">
+          <legend class="font-semibold">
+            3) <strong>Razonamiento:</strong> ¿Encontrás complicado identificar diferencias entre objetos?
+          </legend>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <!-- Nunca -->
+            <div>
+              <input
+                id="q3_nunca"
+                type="radio"
+                name="q3"
+                value="0"
+                class="peer sr-only"
+              />
+              <label for="q3_nunca"
+                     class="flex items-center justify-center rounded-full border border-slate-200
+                            bg-slate-100 px-4 py-3 text-center text-sm sm:text-base font-bold cursor-pointer
+                            transition hover:border-lime-400
+                            peer-checked:bg-lime-500 peer-checked:text-slate-900 peer-checked:border-lime-500">
+                Nunca
+              </label>
+            </div>
+
+            <!-- A veces -->
+            <div>
+              <input
+                id="q3_aveces"
+                type="radio"
+                name="q3"
+                value="1"
+                class="peer sr-only"
+              />
+              <label for="q3_aveces"
+                     class="flex items-center justify-center rounded-full border border-slate-200
+                            bg-slate-100 px-4 py-3 text-center text-sm sm:text-base font-bold cursor-pointer
+                            transition hover:border-lime-400
+                            peer-checked:bg-lime-500 peer-checked:text-slate-900 peer-checked:border-lime-500">
+                A veces
+              </label>
+            </div>
+
+            <!-- Siempre -->
+            <div>
+              <input
+                id="q3_siempre"
+                type="radio"
+                name="q3"
+                value="2"
+                class="peer sr-only"
+              />
+              <label for="q3_siempre"
+                     class="flex items-center justify-center rounded-full border border-slate-200
+                            bg-slate-100 px-4 py-3 text-center text-sm sm:text-base font-bold cursor-pointer
+                            transition hover:border-lime-400
+                            peer-checked:bg-lime-500 peer-checked:text-slate-900 peer-checked:border-lime-500">
+                Siempre
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- q4: Lenguaje -->
+        <fieldset class="space-y-3">
+          <legend class="font-semibold">
+            4) <strong>Lenguaje:</strong> ¿Te cuesta encontrar palabras al hablar o escribir?
+          </legend>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <!-- Nunca -->
+            <div>
+              <input
+                id="q4_nunca"
+                type="radio"
+                name="q4"
+                value="0"
+                class="peer sr-only"
+              />
+              <label for="q4_nunca"
+                     class="flex items-center justify-center rounded-full border border-slate-200
+                            bg-slate-100 px-4 py-3 text-center text-sm sm:text-base font-bold cursor-pointer
+                            transition hover:border-lime-400
+                            peer-checked:bg-lime-500 peer-checked:text-slate-900 peer-checked:border-lime-500">
+                Nunca
+              </label>
+            </div>
+
+            <!-- A veces -->
+            <div>
+              <input
+                id="q4_aveces"
+                type="radio"
+                name="q4"
+                value="1"
+                class="peer sr-only"
+              />
+              <label for="q4_aveces"
+                     class="flex items-center justify-center rounded-full border border-slate-200
+                            bg-slate-100 px-4 py-3 text-center text-sm sm:text-base font-bold cursor-pointer
+                            transition hover:border-lime-400
+                            peer-checked:bg-lime-500 peer-checked:text-slate-900 peer-checked:border-lime-500">
+                A veces
+              </label>
+            </div>
+
+            <!-- Siempre -->
+            <div>
+              <input
+                id="q4_siempre"
+                type="radio"
+                name="q4"
+                value="2"
+                class="peer sr-only"
+              />
+              <label for="q4_siempre"
+                     class="flex items-center justify-center rounded-full border border-slate-200
+                            bg-slate-100 px-4 py-3 text-center text-sm sm:text-base font-bold cursor-pointer
+                            transition hover:border-lime-400
+                            peer-checked:bg-lime-500 peer-checked:text-slate-900 peer-checked:border-lime-500">
+                Siempre
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Acciones + resultado -->
+        <div class="border-t border-slate-200 pt-6 mt-4 space-y-4">
+          <div class="flex flex-col sm:flex-row gap-3">
+            <button type="submit"
+                    class="w-full sm:flex-1 inline-flex items-center justify-center rounded-full
+                           bg-lime-500 hover:bg-lime-600 text-slate-900 font-extrabold
+                           text-base sm:text-lg py-3 px-6 shadow-md transition">
+              Ver recomendación
+            </button>
+
+            <button type="reset"
+                    class="w-full sm:w-auto inline-flex items-center justify-center rounded-full
+                           border border-slate-300 bg-white hover:bg-slate-50
+                           text-slate-700 font-semibold text-base py-3 px-6 transition">
+              Borrar respuestas
+            </button>
+          </div>
+
+          <section id="resultado"
+                   class="text-center text-base sm:text-lg font-semibold text-slate-800 min-h-[2.5rem] space-y-2"
+                   hidden
+                   role="status"
+                   aria-live="polite"
+                   aria-atomic="true"></section>
         </div>
-      </fieldset>
+      </form>
 
-      <!-- q2: Cálculo -->
-      <fieldset class="q">
-        <legend class="q-title">2) <strong>Cálculo:</strong> ¿Te resulta difícil hacer cálculos mentales rápidos?</legend>
-        <div class="options">
-          <label class="opt">
-            <input type="radio" name="q2" value="0"><span>Nunca</span>
-          </label>
-          <label class="opt">
-            <input type="radio" name="q2" value="1"><span>A veces</span>
-          </label>
-          <label class="opt">
-            <input type="radio" name="q2" value="2"><span>Siempre</span>
-          </label>
-        </div>
-      </fieldset>
-
-      <!-- q3: Razonamiento -->
-      <fieldset class="q">
-        <legend class="q-title">3) <strong>Razonamiento:</strong> ¿Encontrás complicado identificar diferencias entre objetos?</legend>
-        <div class="options">
-          <label class="opt">
-            <input type="radio" name="q3" value="0"><span>Nunca</span>
-          </label>
-          <label class="opt">
-            <input type="radio" name="q3" value="1"><span>A veces</span>
-          </label>
-          <label class="opt">
-            <input type="radio" name="q3" value="2"><span>Siempre</span>
-          </label>
-        </div>
-      </fieldset>
-
-      <!-- q4: Lenguaje -->
-      <fieldset class="q">
-        <legend class="q-title">4) <strong>Lenguaje:</strong> ¿Te cuesta encontrar palabras al hablar o escribir?</legend>
-        <div class="options">
-          <label class="opt">
-            <input type="radio" name="q4" value="0"><span>Nunca</span>
-          </label>
-          <label class="opt">
-            <input type="radio" name="q4" value="1"><span>A veces</span>
-          </label>
-          <label class="opt">
-            <input type="radio" name="q4" value="2"><span>Siempre</span>
-          </label>
-        </div>
-      </fieldset>
-
-      <div class="actions">
-        <button type="submit" class="btn primary">Ver recomendación</button>
-        <button type="reset" class="btn ghost">Borrar respuestas</button>
-      </div>
-
-      <hr class="sep" aria-hidden="true">
-
-      <!-- Anuncio accesible del resultado -->
-      <section id="resultado" class="resultado" hidden role="status" aria-live="polite" aria-atomic="true"></section>
-    </form>
+      <!-- Footer dentro de la tarjeta -->
+      <footer class="mt-6 pt-4 border-t border-slate-200 text-xs text-slate-500">
+        Desarrollado por
+        <a href="https://falltem.org/" class="underline">FALLTEM</a> ·
+        Código abierto MIT · Actividad lúdica/orientativa; estos juegos no constituyen diagnóstico médico.
+      </footer>
+    </div>
   </main>
 
-  <footer class="wrap footer">
-    <p class="small">
-      Desarrollado por <a href="https://falltem.org/" rel="noopener">FALLTEM</a> · Código abierto MIT ·
-      Actividad lúdica/orientativa; Estos juegos tienen fines educativos, recreativos y de estimulación cognitiva, no constituyendo en ningún caso un tratamiento médico ni sustituyendo la atención profesional de la salud.
-      <span id="version" class="muted"></span>
-    </p>
-  </footer>
-
-  <noscript><p class="wrap">Este test requiere JavaScript para funcionar.</p></noscript>
-
-  <!-- JS -->
+  <!-- Tu JS original tal cual -->
   <script src="test.js?v=1.1.0" defer></script>
 </body>
 </html>
