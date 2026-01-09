@@ -16,13 +16,12 @@ function trackEvent(eventType, juegoKey) {
       keepalive: true
     });
   } catch (e) {
-    // Silenciar cualquier error de red, no afecta la UX del usuario
+    // silencioso
   }
 }
 
-// Helpers globales para usar desde los onclick del HTML
-function logClickIrAlJuego(juegoKey) {
-  trackEvent('click_ir_al_juego', juegoKey);
+function logClickIrJuego(juegoKey) {
+  trackEvent('click_ir_juego', juegoKey);
 }
 
 function logClickVerTodos(juegoKey) {
@@ -30,9 +29,14 @@ function logClickVerTodos(juegoKey) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('testForm');
+  const form = document.getElementById('test-form');
   const resultEl = document.getElementById('resultado');
 
+  if (!form || !resultEl) return;
+
+  // =========================
+  // Juegos recomendados
+  // =========================
   const juegos = {
     memoria: {
       nombre: "Parejas de Memoria",
@@ -42,25 +46,30 @@ document.addEventListener('DOMContentLoaded', () => {
       nombre: "Cálculo Amable",
       url: "https://fundacion-falltem.github.io/juego-calculo/"
     },
+
     razonamiento: {
-      nombre: "Secuencia de Colores",
-      url: "https://fundacion-falltem.github.io/juego-secuencias/"
+      nombre: "Sudoku",
+      url: "https://fundacion-falltem.github.io/Juego-Sudoku/"
     },
+
     lenguaje: {
       nombre: "Completa la Palabra",
       url: "https://fundacion-falltem.github.io/Completa-palabra/"
-    },
-    intruso: {
-      nombre: "¿Cuál es el Intruso?",
-      url: "https://fundacion-falltem.github.io/juego-intruso/"
     }
   };
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // puntajes
-    const scores = { memoria: 0, calculo: 0, razonamiento: 0, lenguaje: 0 };
+    // =========================
+    // Puntajes
+    // =========================
+    const scores = {
+      memoria: 0,
+      calculo: 0,
+      razonamiento: 0,
+      lenguaje: 0
+    };
 
     const getValue = (name) => {
       const el = form.querySelector(`input[name="${name}"]:checked`);
@@ -72,38 +81,42 @@ document.addEventListener('DOMContentLoaded', () => {
     scores.razonamiento += getValue("q3");
     scores.lenguaje += getValue("q4");
 
-    // encontrar el máximo
+    // =========================
+    // Elegir recomendación
+    // =========================
     const maxScore = Math.max(...Object.values(scores));
-    let keys = Object.keys(scores).filter(k => scores[k] === maxScore);
+    const keys = Object.keys(scores).filter(k => scores[k] === maxScore);
 
-    // elegir al azar si hay empate
+    // empate → azar (está bien para un test orientativo)
     const elegido = keys[Math.floor(Math.random() * keys.length)];
     const juego = juegos[elegido];
 
-    // 🔍 Log: cada vez que el test genera una recomendación
+    // analytics
     trackEvent('recomendacion', elegido);
 
-    // render resultado (versión linda con Tailwind)
+    // =========================
+    // Render resultado
+    // =========================
     resultEl.innerHTML = `
-      <div class="mt-4 bg-slate-50 border border-slate-200 rounded-2xl px-4 py-5 sm:px-6 sm:py-6 shadow-sm">
-        <p class="text-sm sm:text-base text-slate-700 mb-1">
-          En base a tus respuestas, te recomendamos jugar:
-        </p>
-
-        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mb-2">
-          ${juego.nombre}
+      <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 text-center max-w-xl mx-auto">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-800 mb-3">
+          Recomendación orientativa
         </h2>
 
-        <p class="text-xs sm:text-sm text-slate-500 mb-4">
-          Podés empezar ahora mismo o ver otros juegos disponibles.
+        <p class="text-slate-600 mb-6">
+          Según tus respuestas, este ejercicio puede resultarte adecuado:
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <h3 class="text-2xl sm:text-3xl font-black text-blue-700 mb-6">
+          ${juego.nombre}
+        </h3>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="${juego.url}"
              target="_blank"
-             onclick="logClickIrAlJuego('${elegido}')"
+             onclick="logClickIrJuego('${elegido}')"
              class="inline-flex items-center justify-center rounded-full
-                    bg-lime-500 hover:bg-lime-600 text-slate-900 font-extrabold
+                    bg-blue-600 hover:bg-blue-700 text-white font-semibold
                     text-sm sm:text-base py-2.5 px-6 shadow-md transition">
             Ir al juego
           </a>
